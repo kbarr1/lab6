@@ -2,7 +2,7 @@
 
 from songfile import Song
 
-def readfile(filename)
+def readfile(filename):
 
 	with open (filename, encoding="utf-8") as file:
 
