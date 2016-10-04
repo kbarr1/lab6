@@ -6,9 +6,9 @@ class Song:
 		self.artist = artist
 		self.title = title
 
-	def __It__ (self, other):
-		if self.artist < other.artist:
-			return True
+	def __lt__ (self, other):
+		return self.artist < other.artist
+			
 
 	def __str__(self):
 		return "%s sjunger %s" % (self.artist, self.title)
