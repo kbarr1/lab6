@@ -9,7 +9,7 @@ def readfile(filename):
 
 		my_dict = {}
 		lista = []
-		ok = 0
+		
 		for line in file:
 			line = line.split('<SEP>')
 			song = Song(line[0], line[1], line[2], line[3].strip() )
@@ -21,9 +21,7 @@ def readfile(filename):
 			my_dict[line[2]].append(line[1])
 			my_dict[line[2]].append(line[3])
 
-			ok = ok+1
-			if ok == 100:
-				return lista, my_dict
+			
 	return lista, my_dict
 
 
@@ -34,7 +32,10 @@ def readfile(filename):
 def linsok(listan, nyckel): # kod från frl 3
 	for x in listan:
 		if x.artist == nyckel:
+			
 			return True
+
+
 	return False
 
 def binsok(listan, nyckel): # kod från frl 3
@@ -52,21 +53,11 @@ def binsok(listan, nyckel): # kod från frl 3
 				h = mitten -1
 			else:
 				v = mitten + 1
+	if found:			
+		print("hittade", nyckel)		
 	return found
 
-def bubblesort(listan): # kod från kursbok
-	print("hello")
-	x = len(listan) - 1
-	hej = 0
-	for element in range(x, 0, -1): # hur många element i listan
-		for i in range(element): # för varje element i listan av element
 
-			if listan[i+1] < listan[i]: # objekt och < kallart på __lt__
-				temp = listan[i]
-				listan[i] = listan[i+1]
-				listan[i+1] = temp
-		print(hej)
-		hej = hej + 1
 
 def quicksort(data):
 	sista = len(data) - 1
@@ -96,6 +87,13 @@ def partitionera(data, v, h, pivot):
 	data[v], data[h] = data[h], data[v]
 	return v
 
+def dictionary2(dictionary, nyckel):
+
+	k = dictionary[nyckel]
+
+
+
+
 
 
 
@@ -116,18 +114,25 @@ def main():
 	sista = lista[n-1]
 	testartist = sista.artist
 
+	quicktid = timeit.timeit( stmt = lambda: quicksort(lista), number = 1)
+	print("Quicksorten tog", round(quicktid, 4) , "sekunder")
+
 	linjtid = timeit.timeit(stmt = lambda: linsok(lista, testartist), number = 10000)
 	print("Linjärsökningen tog", round(linjtid, 4) , "sekunder")
+
+
 
 	bintid = timeit.timeit( stmt = lambda: binsok(lista, testartist), number = 10000)
 	print("Binärsökningen tog", round(bintid, 4) , "sekunder")
 
-	print([hej.artist for hej in lista])
+	dict_tid = timeit.timeit( stmt = lambda: dictionary2(dictionary, testartist), number = 10000)
+	print("Sökning i dictionary tog", round(dict_tid, 4) , "sekunder")
 
-	quicktid = timeit.timeit( stmt = lambda: quicksort(lista), number = 10000)
-	print("Quicksorten tog", round(quicktid, 4) , "sekunder")
+	#print([hej.artist for hej in lista])
 
-	print([hej.artist for hej in lista])
+	
+
+	#print([hej.artist for hej in lista])
 
 
 
